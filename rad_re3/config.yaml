@@ -1,0 +1,116 @@
+# env
+env: cartpole_swingup
+# IMPORTANT: if action_repeat is used the effective number of env steps needs to be
+# multiplied by action_repeat in the result graphs.
+# This is a common practice for a fair comparison.
+# See the 2nd paragraph in Appendix C of SLAC: https://arxiv.org/pdf/1907.00953.pdf
+# See Dreamer TF2's implementation: https://github.com/danijar/dreamer/blob/02f0210f5991c7710826ca7881f19c64a012290c/dreamer.py#L340
+action_repeat: 4
+# train
+num_train_steps: 1000000
+num_train_iters: 1
+num_seed_steps: 1000
+replay_buffer_capacity: 100000
+seed: 1
+# eval
+eval_frequency: 5000
+num_eval_episodes: 10
+# misc
+log_frequency_step: 10000
+log_save_tb: false
+save_video: false
+device: cuda
+# observation
+pre_image_size: 100
+image_size: 84
+image_pad: 4
+frame_stack: 3
+# global params
+lr: 2e-4
+alpha_lr: 1e-3
+# IMPORTANT: please use a batch size of 512 to reproduce the results in the paper. Hovewer, with a smaller batch size it still works well.
+batch_size: 512
+# state entropy
+use_state_entropy: true
+normalize_state_entropy: true
+average_state_entropy: false
+beta_schedule: linear_decay
+beta_init: 0.05
+beta_decay: 0.00001
+k: 3
+# augmentation type
+aug_type: crop
+# logdir
+logdir: runs
+use_drq: false
+
+# agent configuration
+agent:
+  name: drq
+  class: drq.DRQAgent
+  params:
+    obs_shape: ??? # to be specified later
+    action_shape: ??? # to be specified later
+    action_range: ??? # to be specified later
+    device: ${device}
+    encoder_cfg: ${encoder}
+    critic_cfg: ${critic}
+    actor_cfg: ${actor}
+    random_encoder_cfg: ${random_encoder}
+    discount: 0.99
+    init_temperature: 0.1
+    lr: ${lr}
+    alpha_lr: ${alpha_lr}
+    actor_update_frequency: 2
+    critic_tau: 0.01
+    encoder_tau: 0.05
+    critic_target_update_frequency: 2
+    batch_size: ${batch_size}
+    use_state_entropy: ${use_state_entropy}
+    normalize_state_entropy: ${normalize_state_entropy}
+    average_state_entropy: ${average_state_entropy}
+    beta_init: ${beta_init}
+    beta_decay: ${beta_decay}
+    beta_schedule: ${beta_schedule}
+    image_size: ${image_size}
+    aug_type: ${aug_type}
+    use_drq: ${use_drq}
+
+critic:
+  class: drq.Critic
+  params:
+    encoder_cfg: ${agent.params.encoder_cfg}
+    action_shape: ${agent.params.action_shape}
+    hidden_dim: 1024
+    hidden_depth: 2
+
+actor:
+  class: drq.Actor
+  params:
+    encoder_cfg: ${agent.params.encoder_cfg}
+    action_shape: ${agent.params.action_shape}
+    hidden_depth: 2
+    hidden_dim: 1024
+    log_std_bounds: [-10, 2]
+
+encoder:
+  class: drq.Encoder
+  params:
+    image_size: ${image_size}
+    feature_dim: 50
+    k: ${k}
+    channel: 9
+
+random_encoder:
+  class: drq.Encoder
+  params:
+    image_size: ${pre_image_size}
+    feature_dim: 50
+    k: ${k}
+    channel: 3
+
+# hydra configuration
+hydra:
+  name: ${env}
+  run:
+    dir: ./${logdir}/${now:%Y.%m.%d}/${now:%H%M%S}_${hydra.job.override_dirname}
