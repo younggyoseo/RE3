@@ -1,6 +1,6 @@
 # State Entropy Maximization with Random Encoders for Efficient Exploration (RE3)
 
-Code for [State Entropy Maximization with Random Encoders for Efficient Exploration](https://arxiv.org/abs/2102.XXXXX)
+Code for [State Entropy Maximization with Random Encoders for Efficient Exploration](https://arxiv.org/abs/2102.09430)
 
 In this repository, we provide code for RE3 algorithm described in the paper linked above. We provide code in three sub-directories: `rad_re3` containing code for the combination of RE3 and RAD, `dreamer_re3` containing code for the combination of RE3 and Dreamer, and `a2c_re3` containing code for the combination of RE3 and A2C.
 
@@ -9,7 +9,7 @@ If you find this repository useful for your research, please cite:
 @unpublished{seo_chen2021re3,
   title={State Entropy Maximization with Random Encoders for Efficient Exploration},
   author={Seo, Younggyo and Chen, Lili and Shin, Jinwoo and Lee, Honglak and Abbeel, Pieter and Lee, Kimin},
-  note={arxiv:2102.XXXXX}
+  note={arxiv:2102.09430}
   year={2021}
 }
 ```
