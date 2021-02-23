@@ -46,8 +46,8 @@ use_drq: false
 
 # agent configuration
 agent:
-  name: drq
-  class: drq.DRQAgent
+  name: re3
+  class: re3.RE3Agent
   params:
     obs_shape: ??? # to be specified later
     action_shape: ??? # to be specified later
@@ -77,7 +77,7 @@ agent:
     use_drq: ${use_drq}
 
 critic:
-  class: drq.Critic
+  class: re3.Critic
   params:
     encoder_cfg: ${agent.params.encoder_cfg}
     action_shape: ${agent.params.action_shape}
@@ -85,7 +85,7 @@ critic:
     hidden_depth: 2
 
 actor:
-  class: drq.Actor
+  class: re3.Actor
   params:
     encoder_cfg: ${agent.params.encoder_cfg}
     action_shape: ${agent.params.action_shape}
@@ -94,7 +94,7 @@ actor:
     log_std_bounds: [-10, 2]
 
 encoder:
-  class: drq.Encoder
+  class: re3.Encoder
   params:
     image_size: ${image_size}
     feature_dim: 50
@@ -102,7 +102,7 @@ encoder:
     channel: 9
 
 random_encoder:
-  class: drq.Encoder
+  class: re3.Encoder
   params:
     image_size: ${pre_image_size}
     feature_dim: 50

@@ -1,4 +1,4 @@
-name: drq
+name: re3
 channels:
   - defaults
 dependencies:

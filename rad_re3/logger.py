@@ -25,7 +25,7 @@ COMMON_EVAL_FORMAT = [
 ]
 
 AGENT_TRAIN_FORMAT = {
-    "drq": [
+    "re3": [
         ("batch_reward", "BR", "float"),
         ("actor_loss", "ALOSS", "float"),
         ("critic_loss", "CLOSS", "float"),
@@ -124,7 +124,7 @@ class MetersGroup(object):
 
 class Logger(object):
     def __init__(
-        self, log_dir, save_tb=False, log_frequency=10000, action_repeat=1, agent="drq"
+        self, log_dir, save_tb=False, log_frequency=10000, action_repeat=1, agent="re3"
     ):
         self._log_dir = log_dir
         self._log_frequency = log_frequency

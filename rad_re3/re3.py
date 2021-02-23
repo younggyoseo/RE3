@@ -202,7 +202,7 @@ class Critic(nn.Module):
                 logger.log_param(f"train_critic/q2_fc{i}", m2, step)
 
 
-class DRQAgent(object):
+class RE3Agent(object):
     """Data regularized Q: actor-critic method for learning from pixels."""
 
     def __init__(

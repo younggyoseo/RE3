@@ -6,10 +6,10 @@ In this repository, we provide code for RE3 algorithm described in the paper lin
 
 If you find this repository useful for your research, please cite:
 ```
-@unpublished{seo_chen2021re3,
+@article{seo2021state,
   title={State Entropy Maximization with Random Encoders for Efficient Exploration},
   author={Seo, Younggyo and Chen, Lili and Shin, Jinwoo and Lee, Honglak and Abbeel, Pieter and Lee, Kimin},
-  note={arxiv:2102.09430}
+  journal={arXiv preprint arXiv:2102.09430},
   year={2021}
 }
 ```
