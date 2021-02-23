@@ -4,6 +4,8 @@ Code for [State Entropy Maximization with Random Encoders for Efficient Explorat
 
 In this repository, we provide code for RE3 algorithm described in the paper linked above. We provide code in three sub-directories: `rad_re3` containing code for the combination of RE3 and RAD, `dreamer_re3` containing code for the combination of RE3 and Dreamer, and `a2c_re3` containing code for the combination of RE3 and A2C.
 
+We also provide raw data(.csv) and code for visualization in the `data` directory.
+
 If you find this repository useful for your research, please cite:
 ```
 @article{seo2021state,
