@@ -43,6 +43,7 @@ aug_type: crop
 # logdir
 logdir: runs
 use_drq: false
+save_interval: 250000
 
 # agent configuration
 agent:

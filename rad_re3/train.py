@@ -68,6 +68,9 @@ class Workspace(object):
 
         self.cfg = cfg
 
+        self.model_save_dir = os.path.join(self.work_dir, "model")
+        os.makedirs(self.model_save_dir, exist_ok=True)
+
         self.logger = Logger(
             self.work_dir,
             save_tb=cfg.log_save_tb,
@@ -179,6 +182,8 @@ class Workspace(object):
             obs = next_obs
             episode_step += 1
             self.step += 1
+            if self.step % self.cfg.save_interval == 0:
+                self.agent.save(self.model_save_dir, self.step)
 
 
 @hydra.main(config_path="config.yaml", strict=True)

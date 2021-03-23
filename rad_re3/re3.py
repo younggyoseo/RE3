@@ -480,3 +480,10 @@ class RE3Agent(object):
                 self.critic.encoder, self.critic_target.encoder, self.encoder_tau
             )
 
+    def save(self, save_dir, step):
+        torch.save(
+            self.actor.state_dict(), os.path.join(save_dir, "actor_%d.pt" % (step))
+        )
+        torch.save(
+            self.critic.state_dict(), os.path.join(save_dir, "critic_%d.pt" % (step))
+        )
