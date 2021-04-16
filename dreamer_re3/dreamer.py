@@ -30,7 +30,7 @@ def define_config():
     # General.
     config.logdir = pathlib.Path(".")
     config.seed = 0
-    config.steps = 5e5
+    config.steps = 5e6
     config.eval_every = 1e4
     config.log_every = 1e3
     config.log_scalars = True
@@ -83,6 +83,7 @@ def define_config():
     # Exploration with RE3.
     config.k = 53
     config.beta = 0.1
+    config.rand_enc_dim = 50
     return config
 
 
@@ -260,7 +261,7 @@ class Dreamer(tools.Module):
         self._encode = models.ConvEncoder(self._c.cnn_depth, cnn_act)
         ######################################################################
         #  RE3: Random Encoder / RunningMeanStd Modules
-        self._rand_encode = models.ConvRandEncoder(self._c.cnn_depth, cnn_act)
+        self._rand_encode = models.ConvRandEncoder(self._c.cnn_depth, self._c.rand_enc_dim, cnn_act)
         self._rms = models.RMS()
         ######################################################################
         self._dynamics = models.RSSM(

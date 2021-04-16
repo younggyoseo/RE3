@@ -107,9 +107,10 @@ class ConvRandEncoder(tools.Module):
     with (Dense -> tanh -> layer normalization) architecture
     """
 
-    def __init__(self, depth=32, act=tf.nn.relu):
+    def __init__(self, depth=32, rand_enc_dim=50, act=tf.nn.relu):
         self._act = act
         self._depth = depth
+        self._rand_enc_dim = rand_enc_dim
 
     def __call__(self, obs):
         kwargs = dict(strides=2, activation=self._act)
@@ -120,7 +121,7 @@ class ConvRandEncoder(tools.Module):
         x = self.get("h4", tfkl.Conv2D, 8 * self._depth, 4, **kwargs)(x)
         shape = tf.concat([tf.shape(obs["image"])[:-3], [32 * self._depth]], 0)
         x = tf.reshape(x, shape)
-        x = self.get("h5", tfkl.Dense, 50, tf.nn.tanh)(x)
+        x = self.get("h5", tfkl.Dense, self._rand_enc_dim, tf.nn.tanh)(x)
         x = self.get("layer_norm", tfkl.LayerNormalization, -1)(x)
         return x
 
