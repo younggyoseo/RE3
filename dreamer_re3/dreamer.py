@@ -174,7 +174,7 @@ class Dreamer(tools.Module):
             ######################################################################
             # RE3: + intrinsic rewards
             rand_embed_ = tf.stop_gradient(self._rand_encode(data))
-            rand_embed = tf.reshape(rand_embed_, [-1, 50])
+            rand_embed = tf.reshape(rand_embed_, [-1, self._c.rand_enc_dim])
             dist = tf.norm(rand_embed[:, None, :] - rand_embed[None, :, :], axis=-1)
             int_reward = -1.0 * tf.math.top_k(-dist, k=self._c.k).values[:, -1]
             norm_int_reward = self._rms(int_reward)
