@@ -1,6 +1,6 @@
-# State Entropy Maximization with Random Encoders for Efficient Exploration (RE3)
+# State Entropy Maximization with Random Encoders for Efficient Exploration (RE3) (ICML 2021)
 
-Code for [State Entropy Maximization with Random Encoders for Efficient Exploration](https://arxiv.org/abs/2102.09430)
+Code for [State Entropy Maximization with Random Encoders for Efficient Exploration](https://arxiv.org/abs/2102.09430).
 
 In this repository, we provide code for RE3 algorithm described in the paper linked above. We provide code in three sub-directories: `rad_re3` containing code for the combination of RE3 and RAD, `dreamer_re3` containing code for the combination of RE3 and Dreamer, and `a2c_re3` containing code for the combination of RE3 and A2C.
 
@@ -8,10 +8,10 @@ We also provide raw data(.csv) and code for visualization in the `data` director
 
 If you find this repository useful for your research, please cite:
 ```
-@article{seo2021state,
+@inproceedings{seo2021state,
   title={State Entropy Maximization with Random Encoders for Efficient Exploration},
   author={Seo, Younggyo and Chen, Lili and Shin, Jinwoo and Lee, Honglak and Abbeel, Pieter and Lee, Kimin},
-  journal={arXiv preprint arXiv:2102.09430},
+  booktitle={International Conference on Machine Learning},
   year={2021}
 }
 ```
